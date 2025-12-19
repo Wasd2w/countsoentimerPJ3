@@ -33,11 +33,17 @@
             <label class="check"><input id="sound" type="checkbox" /> Звукове</label>
         </div>
 
-        <label>Гучність</label>
-        <div class="range-wrap">
-            <input id="volume" type="range" min="0" max="100" value="50" />
-            <div class="vol"><span id="volVal">50</span>/100</div>
-        </div>
+        <label for="volume">Гучність</label>
+        <input
+                id="volume"
+                type="range"
+                min="0"
+                max="100"
+                value="50"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="50"
+        />
 
         <div class="timer" aria-live="polite">
             <p class="time" id="time">00:00:00</p>
