@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Таймер зворотного відліку</title>
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+<div class="app">
+    <section class="card">
+        <h2 class="title">
+            Таймер зворотного відліку
+            <span class="pill" id="pillStorage">localStorage</span>
+        </h2>
+
+        <label for="name">Назва таймера (optional)</label>
+        <input id="name" type="text" maxlength="60" placeholder="Напр.: Чай / Помідор / Фокус" />
+
+        <div class="row">
+            <div>
+                <label for="minutes">Хвилини</label>
+                <input id="minutes" type="text" inputmode="numeric" placeholder="0..999" />
+            </div>
+            <div>
+                <label for="seconds">Секунди</label>
+                <input id="seconds" type="text" inputmode="numeric" placeholder="0..59 (або більше — нормалізується)" />
+            </div>
+        </div>
+
+        <div class="checks">
+            <label class="check"><input id="visual" type="checkbox" /> Візуальне</label>
+            <label class="check"><input id="sound" type="checkbox" /> Звукове</label>
+        </div>
+
+        <label>Гучність</label>
+        <div class="range-wrap">
+            <input id="volume" type="range" min="0" max="100" value="50" />
+            <div class="vol"><span id="volVal">50</span>/100</div>
+        </div>
+
+        <div class="timer" aria-live="polite">
+            <p class="time" id="time">00:00:00</p>
+            <div class="status">
+                <span class="dot idle" id="dot"></span>
+                <span id="statusText">Idle</span>
+                <span class="kbd" id="remainingHint"></span>
+            </div>
+        </div>
+
+        <div class="btns">
+            <button class="btn-primary" id="btnStart">Старт</button>
+            <button id="btnPause">Пауза</button>
+            <button class="btn-danger" id="btnStop">Стоп</button>
+            <button id="btnRestart">Перезапуск</button>
+        </div>
+
+        <div class="btns">
+            <button class="btn-ghost" id="btnSavePreset">Зберегти як пресет</button>
+            <button class="btn-ghost" id="btnReset">Reset (очистити)</button>
+            <button class="btn-ghost" id="btnSeed">Seed (завантажити)</button>
+        </div>
+
+        <div class="msg" id="msg"></div>
+
+        <div class="footer-hint">
+            Порада: <span class="kbd">Reset</span> очищує localStorage, <span class="kbd">Seed</span> завантажує стартові дані.
+            Працює офлайн, без мережевих запитів. Назви екрануються (анти-XSS).
+        </div>
+    </section>
+
+    <section class="card">
+        <h2 class="title">
+            Пресети
+            <span class="pill" id="presetCount">0</span>
+        </h2>
+        <div class="list" id="presetList"></div>
+    </section>
+</div>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Сповіщення">
+    <div class="modal">
+        <h3>Час вийшов!</h3>
+        <p id="modalText">Таймер завершив відлік.</p>
+        <div class="modal-actions">
+            <button class="btn-ghost" id="btnMute">Зупинити звук</button>
+            <button class="btn-primary" id="btnCloseModal">OK</button>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="./src/app.js"></script>
+</body>
+</html>
